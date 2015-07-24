@@ -1,5 +1,7 @@
 ###Notebook pulling test
 - Cells has to played before widget works!
+- The one without widgets (v2) works
+	- the output cell formatting is ugly! It should be just as wide as the input cell. I don!t know yet how to change it.
 
 ###Other tests
 - See the notebooks for more detailed explanation
