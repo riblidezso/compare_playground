@@ -6,3 +6,7 @@
 ###Other tests
 - See the notebooks for more detailed explanation
 - They were created elsewhere so they might not work here  (ETE2 for sure not)
+
+###CGE Outbreak Map
+- Integration of the cge outbreak map in ipython notebook, with user created data
+- see http://dkrib.web.elte.hu/compare/compare.html for details
