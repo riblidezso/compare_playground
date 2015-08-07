@@ -1,0 +1,202 @@
+<div class="modal-header">
+  <h3 class="modal-title">Pipeline Isolates Viewer</h3>
+</div>
+
+<tabset>
+    <tab heading="Services">
+
+      <div class="modal-body">
+        <table class="table table-condensed">
+          <thead>
+              <tr>
+                  <th>Isolate ID</th>
+                  <th>Sample Name</th>
+                  <th>Sample Type</th>
+                  <th>Sequencing Platform</th>
+                  <th>Sequencing Type</th>
+                  <th>Pre Assembled</th>
+              </tr>
+          </thead>
+          <tr>
+            <td> {{analysis.id}}</td>
+            <td> {{analysis.sample_name}}</td>
+            <td> {{analysis.sample_type}}</td>
+            <td> {{analysis.sequencing_platform}}</td>
+            <td> {{analysis.sequencing_type}}</td>
+            <td class="glyphicon" ng-class="{
+               'glyphicon-ok': (analysis.pre_assembled === 1),
+               'glyphicon-remove': (analysis.pre_assembled === 0)
+            }"> </td>
+
+          </tr>
+
+        </table>
+
+            <accordion close-others="true">
+              <accordion-group ng-repeat="(service, value) in analysis.services">
+
+                <accordion-heading >
+                  [{{value.date}}]
+                  <span class="label" ng-class="{
+                     'label-warning': (value.status === 'In progress'),
+                     'label-success': (value.status === 'Success'),
+                     'label-primary': (value.status === 'Done'),
+                     'label-danger': (value.status === 'Failure')
+                  }"> {{value.status}}</span>
+                  {{value.service}}
+                  <i>({{value.id}})</i>
+
+                  <div class="pull-right ">
+                    <div ng-click="removeService(value.id)" class="pull-right badge">Delete
+                      <span class="glyphicon glyphicon-minus-sign"></span>
+                    </div>
+                  </div>
+                  <!-- <div class="pull-right ">
+
+                  </div> -->
+                </accordion-heading>
+                  <div>
+
+                    <!-- Add content for each service -->
+
+                    <!-- <button type="button" class="badge btn btn-default btn-xs"
+                      ng-click="getServiceResults(value.id, analysis.id, value.date, value.service);">
+                      <strong>Load results...</strong>
+                    </button> -->
+                  </div>
+
+                  <div ng-class="service">
+                    {{value.html}}
+                  </div>
+
+              </accordion-group>
+            </accordion>
+
+      </div>
+
+
+
+
+
+    </tab>
+
+    <tab heading="Pipeline Summary">
+
+
+      <!-- Result Report -->
+      <div class="modal-body">
+
+         <div class="row modal-row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <!--Taxonomy Frame-->
+                      <h3 class="panel-title large-panel">Taxonomy</h3>
+                    </div>
+                  <div class="panel-body">
+                    <dl>
+                       <dt>Predicted liniage:</dt>
+                       <dd> {{KmerFinder.liniage}}</dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                       <dt>Predicted Species</dt>
+                       <dd>{{KmerFinder.predicted_species}}</dd>
+                       <dt>Closest Match</dt>
+                       <dd>{{KmerFinder.closest_match}}</dd>
+                       <dt>Taxonomy ID</dt>
+                       <dd>{{KmerFinder.taxid}}</dd>
+                       <dt>K-mer Overlap</dt>
+                       <!-- TODO: convert coverage to percentage two decimals  -->
+                       <dd>{{KmerFinder.Kmer_hits}}/{{KmerFinder.Kmers_template}} ({{KmerFinder.kmer_coverage}}) <a class="label label-info" href='#'><i class="glyphicon glyphicon-file"></i></a></dd>
+                    </dl
+                    <dl class="dl-horizontal">
+                       <dt>MLST Scheme[ST]</dt>
+                       <!-- <dd><a class="label label-info" href='#'>{{MLST.scheme_name}} [{{MLST.scheme_type}}]</a></dd> -->
+                       <dd>
+                         <a class="label label-default" href='#'>{{MLST.scheme_name}} [{{MLST.sequence_type}}]</a></dd>
+                       </dd>
+
+                       <dt>Plasmid[pMLST]</dt>
+                      <dd>
+                          <a ng-repeat="element in PlasmidFinder.unschemed" class="label label-warning" href='#'>{{element.plasmid}}</a>
+                          <a ng-repeat="element in pMLST" class="label label-warning" href='#'>{{element.scheme_name}} [{{element.sequence_type}}]</a>
+                      </dd>
+
+                    </dl>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 greyback">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <!--Pathogenicity Prediction Frame-->
+                      <h3 class="panel-title large-panel">Pathogenicity Prediction</h3>
+                    </div>
+                  <div class="panel-body">
+                    <dl class="dl-horizontal">
+                       <dt>Pathogen Probability</dt>
+                       <!-- TODO: remember to convert it to percentage  -->
+                       <dd><span class="label label-danger">{{PathogenFinder.probability}}</span> <a class="label label-info" href='#'><i class="glyphicon glyphicon-file"></i></a></dd>
+                    </dl>
+                    <div class="row modal-row">
+                       <div class="col-md-6">
+                          <dl>
+                             <dt>Resistance Genes <a class="label label-info" href='#'><i class="glyphicon glyphicon-file"></i></a></dt>
+                             <dd>
+                                  <!-- TODO: Fix label class based on qualty score  -->
+                                  <span ng-repeat="element in ResFinder.db_hits">
+                                    <a  class="label label-warning" href='#'>
+                                      {{element.db_name}}
+                                    </a><br>
+                                  </span>
+                                   <!-- <a class="label label-warning" href='#'>Aminoglycoside</a><br>
+                                   <a class="label label-default" href='#'>Beta-lactam</a><br>
+                                   <a class="label label-danger" href='#'>Phenicol</a><br>
+                                   <a class="label label-danger" href='#'>Rifampicin</a><br> -->
+                             </dd>
+                          </dl>
+                       </div>
+                       <div class="col-md-6">
+                          <dl>
+                             <dt>Virulence Genes <a class="label label-info" href='#'><i class="glyphicon glyphicon-file"></i></a></dt>
+                             <dd>
+                                  <!-- TODO: Fix label class based on qualty score  -->
+                                  <span ng-repeat="element in VirulenceFinder.db_hits">
+                                    <a class="label label-warning" href='#'>
+                                      {{element.gene}}
+                                    </a><br>
+                                  </span>
+
+                                   <!-- <a class="label label-danger" href='#'>momA</a><br>
+                                   <a class="label label-danger" href='#'>iss</a><br>
+                                   <a class="label label-default" href='#'>prfB</a><br> -->
+                             </dd>
+                          </dl>
+                       </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+         </div>
+
+
+    </div>
+
+
+
+
+
+    </tab>
+
+  </tabset>
+
+
+
+
+
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <!-- <button class="btn btn-warning" ng-click="cancel()">Cancel</button> -->
+</div>

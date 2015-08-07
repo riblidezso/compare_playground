@@ -1,0 +1,22 @@
+/* SVG Outbreaks */
+
+#outbreaks {
+  position: relative;
+}
+
+.circlePath {
+  fill: brown;
+  fill-opacity: .2;
+  /*stroke: #fff;
+  stroke-width: 1.5px;*/
+}
+
+.circlePathSelected {
+  fill: green;
+  fill-opacity: .7;
+}
+
+.circlePath:hover {
+  fill: blue;
+  /*fill-opacity: .7;*/
+}

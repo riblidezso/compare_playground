@@ -1,0 +1,99 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ng-grid/ng-grid.css" />
+    <link rel="stylesheet" href="bower_components/ngActivityIndicator/css/ngActivityIndicator.css" />
+    <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" href="bower_components/dcjs/dc.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/map.css">
+    <link rel="stylesheet" href="styles/visualizations.css">
+    <link rel="stylesheet" href="styles/outbreaks.css">
+    <link rel="stylesheet" href="styles/uploader.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="mapVisualizationApp" ng-post-message>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div ng-view=""></div>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/crossfilter/crossfilter.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/ng-grid/build/ng-grid.js"></script>
+    <script src="bower_components/ngActivityIndicator/ngActivityIndicator.js"></script>
+    <script src="bower_components/leaflet/dist/leaflet.js"></script>
+    <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+    <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+    <script src="bower_components/geocoder-js/dist/geocoder.min.js"></script>
+    <script src="bower_components/js-xlsx/dist/xlsx.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
+    <script src="bower_components/dcjs/dc.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- Outside built scripts.js to avoid problems compiling -->
+    <script src="scripts/config.js"></script>
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/services/crossfilterservice.js"></script>
+    <script src="scripts/services/excelparserservice.js"></script>
+    <script src="scripts/services/geolocationservice.js"></script>
+    <script src="scripts/services/groupisolatesservice.js"></script>
+    <script src="scripts/services/isolatesservice.js"></script>
+    <script src="scripts/services/mapmarkersservice.js"></script>
+    <script src="scripts/services/tableviewservice.js"></script>
+    <script src="scripts/services/excelvalidationservice.js"></script>
+    <script src="scripts/directives/attributepicker.js"></script>
+    <script src="scripts/directives/barchart.js"></script>
+    <script src="scripts/directives/map.js"></script>
+    <script src="scripts/directives/mapoutbreaks.js"></script>
+    <script src="scripts/directives/piechart.js"></script>
+    <script src="scripts/directives/rowchart.js"></script>
+    <script src="scripts/directives/timeline.js"></script>
+    <script src="scripts/directives/file.js"></script>
+    <script src="scripts/services/locationgroupingservice.js"></script>
+    <script src="scripts/services/isolaterunsservice.js"></script>
+    <script src="scripts/services/postmessageservice.js"></script>
+    <script src="scripts/directives/ngpostmessage.js"></script>
+    <!-- endbuild -->
+    <script src="scripts/templates.js"></script>
+</body>
+</html>

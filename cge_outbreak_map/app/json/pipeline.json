@@ -1,0 +1,153 @@
+{
+  "MLST": {
+    "service_id": 5318,
+    "scheme_name": "ecoli",
+    "sequence_type": "ST-44"
+  },
+  "VirulenceFinder": {
+    "service_id": 5320,
+    "db_hits": [
+      {
+        "db_name": "Glutamate decarboxylase",
+        "quality": 1.2354,
+        "identity": 0.9991,
+        "overlap": [
+          1401,
+          1133
+        ],
+        "gene": "gad"
+      },
+      {
+        "db_name": "P-related fimbriae regulatory gene",
+        "quality": 1.0,
+        "identity": 1.0,
+        "overlap": [
+          882,
+          882
+        ],
+        "gene": "prfB"
+      }
+    ]
+  },
+  "pMLST": [{
+    "service_id": 5321,
+    "scheme_name": "IncF",
+    "sequence_type": "[F-:A4:B6]"
+  }],
+  "PathogenFinder": {
+    "service_id": 5311,
+    "probability": "0.938"
+  },
+  "PlasmidFinder": {
+    "service_id": 5319,
+    "schemed": [
+      {
+        "scheme_name": "IncF",
+        "quality": "",
+        "sequence_type": "[F-:A4:B6]"
+      }
+    ],
+    "unschemed": [{
+      "plasmid":   "col(1234)",
+      "identity":  "identity",
+      "overlap":   "overlap",
+      "quality":   "quality"
+    }]
+  },
+  "KmerFinder": {
+    "Kmer_hits": 2240.7,
+    "liniage": "Bacteria; Proteobacteria; Gammaproteobacteria; Enterobacteriales; Escherichia coli",
+    "taxid": "12345",
+    "predicted_species": "Escherichia coli",
+    "closest_match": "Escherichia coli ETEC H10407",
+    "service_id": 5310,
+    "species": "Escherichia coli",
+    "kmers_template": "5335",
+    "kmer_coverage": "5335"
+  },
+  "ResFinder": {
+    "service_id": 5312,
+    "db_hits": [
+      {
+        "db_name": "Beta-lactam",
+        "quality": 1.0,
+        "identity": 1.0,
+        "overlap": [
+          831,
+          831
+        ],
+        "gene": "blaOXA-1"
+      },
+      {
+        "db_name": "Tetracycline",
+        "quality": 1.0,
+        "identity": 1.0,
+        "overlap": [
+          1206,
+          1206
+        ],
+        "gene": "tet(B)"
+      },
+      {
+        "db_name": "Aminoglycoside",
+        "quality": 1.0,
+        "identity": 1.0,
+        "overlap": [
+          837,
+          837
+        ],
+        "gene": "strB"
+      },
+      {
+        "db_name": "Sulphonamide",
+        "quality": 1.0,
+        "identity": 1.0,
+        "overlap": [
+          816,
+          816
+        ],
+        "gene": "sul2"
+      },
+      {
+        "db_name": "Fluoroquinolone and aminoglycoside",
+        "quality": 1.0,
+        "identity": 1.0,
+        "overlap": [
+          600,
+          600
+        ],
+        "gene": "aac(6\")Ib-cr"
+      },
+      {
+        "db_name": "Trimethoprim",
+        "quality": 1.0,
+        "identity": 1.0,
+        "overlap": [
+          474,
+          474
+        ],
+        "gene": "dfrA17"
+      },
+      {
+        "db_name": "Macrolide",
+        "quality": 0.9956,
+        "identity": 0.9967,
+        "overlap": [
+          921,
+          922
+        ],
+        "gene": "mph(A)"
+      },
+      {
+        "db_name": "Phenicol",
+        "quality": 1.4321,
+        "identity": 1.0,
+        "overlap": [
+          633,
+          442
+        ],
+        "gene": "catB3"
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+<!-- Template for selectable picker -->
+
+<div id="{{id}}" ng-hide="nodata">
+<a class="reset" ng-click="resetDimension()" style="display: inline;">
+    reset
+</a>
+<!--   <strong >{{name}} </strong> -->
+  <div class="btn-group dropdown" is-open="status.isopen">
+    <button class="btn btn-default btn-sm dropdown-toggle" type="button">
+        {{selected}}<span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu scrollable-menu">
+      <li ng-repeat = "element in elements">
+        <span ng-click = "filterDimension(element)">
+          {{element.key}}
+        </span>
+      </li>
+    </ul>
+  </div>
+  <!-- <a ng-if="selected != name" class="reset" ng-click="resetDimension()" style="display: inline;"> -->
+  <div class="clearfix"></div>
+</div>

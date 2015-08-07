@@ -1,0 +1,12 @@
+.container-map{
+  height : 648px;
+  display: table;
+  /* Reset the container */
+  max-width: none !important;
+}
+
+#leaflet_map {
+  width: 1024px;
+  min-height: 648px;
+  position: absolute;
+}

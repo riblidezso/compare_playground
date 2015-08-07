@@ -1,0 +1,253 @@
+<div class="container alert-container" ng-hide="errorsExist === false">
+
+    <div id="no_user" class={{infoClass}}>
+      <strong>Warning!: </strong>{{infoMessage}}
+
+       <!-- <span ng-show="!unauthorized"> -->
+       <span ng-show="multipleErrors">
+          <button style="float: right;" class="btn-xs btn-danger" ng-click="isCollapsed = !isCollapsed" >
+            <span class="glyphicon"
+               ng-class="{
+                  'glyphicon-minus': !isCollapsed,
+                  'glyphicon-plus': isCollapsed
+               }"></span>
+            </span>
+          </button>
+
+          <div collapse="isCollapsed">
+            <div class="panel-body">
+              <p ng-repeat="message in messages">
+               {{message}}
+              </p>
+            </div>
+          </div>
+       </span>
+    </div>
+
+</div>
+
+<div class="container excel-container">
+    <div class="row">
+      <div class="col-xs-3">
+         <ul class="nav nav-tabs nav-justified">
+           <li ng-class="{active: (activeView == 'details')}">
+             <a ng-click="activeView = 'details'">Details</a>
+            </li>
+           <li ng-class="{active: (activeView == 'map')}">
+             <a ng-click="activeView = 'map'">Map</a>
+           </li>
+         </ul>
+      </div>
+
+      <div class="col-xs-5 col-xs-offset-1">
+
+        <!-- <button ng-click="demoData();" type="button" class="btn-xs btn-danger">
+           Demo Data
+        </button> -->
+
+        <div class="btn-group" dropdown is-open="status.isopen">
+          <button type="button" class="btn-xs btn-info dropdown-toggle" ng-disabled="disabled">
+            Demo Data <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li ng-click="demoData('influenza_data.js', 'flu');">Influenza</li>
+            <li ng-click="demoData('dengue_data.js', 'dengue');">Dengue</li>
+            <li ng-click="demoData('ebola_data.js', 'ebola');">Ebola</li>
+            <li ng-if="devMode" ng-click="demoData('staticFlu.js', 'flu');">Runs test</li>
+          </ul>
+        </div>
+
+        <span file id="excel" loading="spinner"></span>
+        {{geolocation.lastLocation}}
+        <!-- <span ng-show="AILoading" class="ai-circled ai-indicator ai-dark-spin small-spinner"
+          ng-hide="geolocation.lastLocation === ''"> -->
+        </span>
+      </div>
+
+      <div class="col-xs-3">
+        <div class="downloadExcel">
+            <span tooltip="{{excelInfoText}}" tooltip-placement="left"
+               id="excelInformation" class="glyphicon glyphicon-info-sign"
+            ></span>
+            <button type="button" class="btn btn-success" ng-click="downloadExcelFile()">
+                <span class="glyphicon glyphicon-cloud-download"></span>  Excel Template
+            </button>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="container container-map" ng-show="activeView == 'map'">
+
+  <!-- Form to filter Database -->
+
+  <!-- Date -->
+  <!--
+  <div class="row" id="sandbox-container">
+    <div class="input-daterange input-group col-xs-4 col-xs-offset-8" id="datepicker">
+        <input type="text" class="input-sm form-control" name="start" value = "{{ini_date}}"/>
+        <span class="input-group-addon">to</span>
+        <input type="text" class="input-sm form-control" name="end" value = "{{fin_date}}"/>
+    </div>
+  </div>
+  -->
+
+  <!-- Country -->
+
+  <!-- Subtype -->
+
+  <!-- Genus -->
+
+  <!-- Species -->
+
+  <!-- Source -->
+
+  <!-- Pathogenity -->
+
+  <div map lat="36" long="-89" id="leaflet_map"></div>
+
+  <div class="row visualizations" id="buttons_container" ng-hide="waitingForData">
+
+    <!-- Filter Pickers -->
+    <div class="col-xs-3 col-xs-offset-1">
+      <div class="row visualizations">
+        <!-- Source picker -->
+        <!-- <div attribute-picker class="col-xs-4" id="source-pick"  data="subtype" name="Subtype"></div> -->
+        <!-- Genus picker -->
+        <!-- <div attribute-picker class="col-xs-4" id="sampleType-pick" data="sampleType" name="Sample"></div> -->
+        <!-- Species picker -->
+        <!-- <div attribute-picker class="col-xs-4" id="organism-pick" data="organism" name="Organism"></div> -->
+      </div>
+    </div>
+
+    <!-- Group by button -->
+    <div id ="grouping_buton" class="col-xs-3 col-xs-offset-1">
+      <span ng-show="mapLayer == 'outbreaks'" class="btn-group" dropdown>
+         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+           Group by: <span class="caret"></span>
+         </button>
+         <ul class="dropdown-menu" role="menu">
+           <li><a ng-click="groupingCriteria = 'id'">by Isolate</a></li>
+           <li><a ng-click="groupingCriteria = 'location'">by Location</a></li>
+         </ul>
+      </span>
+
+         <button type="button" class="btn btn-default btn-sm" ng-click="clustersDeselected();"
+            ng-hide="mapLayer !== 'outbreaks' && selectedOutbreaks.length === 0">
+           clear selection
+         </button>
+
+      <!-- FIXME: doesn't work properly -->
+      <!-- <div ng-click="deselectedClusters()" class="reset" id="reset_clusters" ng-hide="selectedOutbreaks.length === 0">clear cluster selection</div> -->
+
+    </div>
+
+    <!-- TODO: Play by button -->
+    <!-- <div id ="play_buton" class="col-xs-1" class="btn-group" ng-click="play_animation()">
+      Play
+    </div> -->
+
+    <!-- Show/Hide clusters -->
+    <div class="col-xs-3 col-xs-offset-1">
+      <span class="input-group-addon">
+        <input type="radio" name="optionsRadios" ng-click="mapLayer = 'clusters'" checked> Clusters
+      </span>
+      <span class="input-group-addon">
+        <input type="radio" name="optionsRadios" ng-click="mapLayer = 'outbreaks'"> Isolates
+      </span>
+    </div>
+  </div> <!-- /buttons_container -->
+
+  <div class="row visualizations" ng-hide="waitingForData">
+    <div class="col-xs-2 col-xs-offset-10 btn-group btn-group-xs">
+      <button id="countries-button" ng-click="pieLayer = 'countries'" type="button" class="btn btn-default">country</button>
+      <button id="sources-button" ng-click="pieLayer = 'sources'" type="button" class="btn btn-default">source</button>
+    </div>
+
+    <!-- Country Pie -->
+    <div class="col-xs-2 col-xs-offset-10 visualization-box" id="country-pie" ng-show="pieLayer === 'countries'">
+        <div attribute-picker id="country-pick" data="countries" name="Countries"></div>
+        <bar-chart ng-show="countries[1].size() > 4" id="countries-pie" data="countries"></bar-chart>
+        <pie-chart ng-hide="countries[1].size() > 4" id="countries-pie" data="countries"></pie-chart>
+    </div>
+
+    <!-- Sources Pie -->
+    <div class="col-xs-2 col-xs-offset-10 visualization-box" id="source-pie" ng-show="pieLayer === 'sources'">
+        <div attribute-picker id="sources-pick" data="sources" name="Sources"></div>
+        <bar-chart ng-show="sources[1].size() > 4" id="sources-pie" data="sources"></bar-chart>
+        <pie-chart ng-hide="sources[1].size() > 4" id="sources-pie" data="sources"></pie-chart>
+
+    </div>
+  </div><!-- /row -->
+
+  <div class="row visualizations" ng-hide="waitingForData">
+      <!-- Pathogenic distribution -->
+      <div class="col-xs-2 col-xs-offset-10 visualization-box" id="path-dist">
+        <row-chart id="path-chart" name="Pathogenic" data="pathogenic"></row-chart>
+      </div>
+  </div><!-- /row -->
+
+  <!-- Time Line -->
+  <time-line
+     class="row visualizations" id="time-line-chart"
+     data="timeline" name="Time Line" ng-hide="waitingForData">
+    </time-line>
+  <!-- /Time Line -->
+
+</div>
+<!-- Isolate Viewer -->
+<!-- TODO: Explore the idea or moving this to a different angularjs view -->
+<div class="container container-table" ng-hide="activeView == 'map'">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+
+      <!-- <h3 class="panel-title col-xs-5">
+        Isolates Detailed View </br>
+        <span ng-show="rowSelected"><strong>Selection feature hasn't been implemented yet</strong></span>
+      </h3> -->
+
+      <div class="row">
+        <div class="col-xs-6">
+          <!-- <span class="glyphicon glyphicon-search" style="display:inline-block;"></span> -->
+
+          <input id="searchInput" type="text" class="form-control" placeholder="Search..." ng-model="gridOptions.filterOptions.filterText">
+          <span tooltip-html-unsafe="{{searchInfoText}}" tooltip-placement="right"
+             id="searchInformation" class="glyphicon glyphicon-info-sign"
+          ></span>
+             <!-- <button class="btn btn-default btn-xs"
+               colorpicker type="button" colorpicker-position="bottom"
+               ng-model="groupColor"> Change Color
+             </button> -->
+        </div>
+          <div class="col-xs-6">
+            <span class="pull-right">
+              <span ng-show="groupSelection.length !== 0">{{groupSelection.length}} selected</span>
+              <span tooltip ="Apply color" ng-show="groupColor!==0" ng-click="changeColorOfSelection();" ng-attr-style="color:{{groupColor}}; background-color:{{groupColor}}" class="badge glyphicon">
+                0
+              </span>
+
+              <!-- Group Color -->
+              <input style= "color: black;" colorpicker ng-model="groupColor" type="text">
+              <!-- <span ng-show="groupColor!==''">Group Color</span> -->
+              <!-- <span id="glyphColorPicker" ng-click="changeColorOfSelection();" style="color:{{groupColor}}" class="glyphicon glyphicon-tint"></span> -->
+              <span tooltip ="Restore colors" title="Restore colors" ng-show="groupColor!==0" ng-click="removeColorOfSelection();" class="glyphicon glyphicon-remove">
+              </span>
+            </span>
+          </div>
+      </div>
+    </div>
+
+    <div class="panel-body-no-padding">
+      <div class="gridStyle" ng-grid="gridOptions"></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!--  Spinner to show loading progress -->
+<div id="spinner" class="container" ng-class="{'container-spinner': waitingForData}">
+   <div ng-show="AILoading" class="ai-circled ai-indicator ai-white-spin ng-hide">
+   </div>
+</div>

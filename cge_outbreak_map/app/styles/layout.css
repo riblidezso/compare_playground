@@ -1,0 +1,138 @@
+.container{
+  /* Reset the container */
+  width: 1024px;
+  padding: 0px;
+}
+
+.row{
+   width: 1024px;
+}
+
+.row.modal-row{
+  width: inherit;
+}
+
+.visualizations{
+  height: 100%;
+  display: table-row;
+  padding-right: 10px;
+
+}
+
+.col-xs-3, .col-xs-9, .col-xs-2, .col-xs-12, .col-xs-1, .col-xs-8, .col-xs-7, .col-xs-5
+{
+   display: table-cell;
+   margin-top: 10px;
+}
+
+.container-full{
+   margin: 10 auto;
+   width: 100%;
+   height: 100%; /* For at least Firefox */
+   min-height: 100%;
+}
+
+.excel-container.row{
+   margin-bottom: 10px;
+}
+
+/* Spinner */
+.container-spinner{
+   color: white;
+   background-color: #9c9c9c;
+   opacity: 0.5;
+   /*position: relative;*/
+   height : 650px;
+   margin-top: -650px;
+   margin-right: auto;
+   margin-left: auto;
+}
+
+.ai-circled{
+   margin-top: 324px;
+   margin-left: 50%;
+}
+
+
+.small-spinner{
+  display: inline-block;
+  margin: 0px;
+  width: 15px;
+  height: 15px;
+  top: 50%;
+  position: static;
+
+}
+
+/* Container table */
+.container-table{
+   /*max-height : 643px;*/
+   min-height : 648px;
+   display: table;
+   /* Reset the container */
+   max-width: none !important;
+
+}
+
+.container-table > .row{
+   margin-left: 0px;
+}
+
+.input-group-sm{
+
+}
+
+#searchInformation, #searchInput{
+  /*float: right;*/
+
+}
+
+#searchInput{
+  width: 95%;
+  display: inline;
+}
+
+/* Grid */
+.gridStyle {
+/*     border: 1px solid rgb(212,212,212); */
+     /*width: 954px;*/
+     width: 1022px;
+    height: 595px;
+    padding: 0px;
+    margin: 0px;
+}
+#reset_clusters{
+  font-weight: bold;
+  float: right;
+}
+.reset:hover{
+  cursor: pointer;
+}
+
+.panel{
+  margin-bottom: 0px;
+}
+
+.panel-body-no-padding{
+  padding: 0px;
+}
+
+
+.glyphicon:hover{
+  cursor: pointer;
+}
+
+
+.badge{
+	margin-left: 12px;
+	margin-top: 0px;
+}
+
+
+/*.label{
+   font-size: large;
+}*/
+
+.panel-title.large-panel{
+  font-size: 24px;
+}

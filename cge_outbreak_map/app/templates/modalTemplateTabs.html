@@ -1,0 +1,69 @@
+<div class="modal-header">
+  <h3 class="modal-title">Analysis</h3>
+</div>
+<div class="modal-body">
+  <table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Isolate ID</th>
+            <th>Sample Name</th>
+            <th>Sample Type</th>
+            <th>Sequencing Platform</th>
+            <th>Sequencing Type</th>
+            <th>Pre Assembled</th>
+        </tr>
+    </thead>
+    <tr>
+      <td> {{analysis.id}}</td>
+      <td> {{analysis.sample_name}}</td>lo
+      <td> {{analysis.sample_type}}</td>
+      <td> {{analysis.sequencing_platform}}</td>
+      <td> {{analysis.sequencing_type}}</td>
+      <td class="glyphicon" ng-class="{
+         'glyphicon-ok': (analysis.pre_assembled === 1),
+         'glyphicon-remove': (analysis.pre_assembled === 0)
+      }"> </td>
+
+    </tr>
+
+  </table>
+
+
+  <tabset justified="true">
+
+    <tab ng-repeat="(service, value) in analysis.services" heading="{{value.service}}">
+      <accordion close-others="tru">
+        <accordion-group>
+
+          <accordion-heading >
+            <span class="label" ng-class="{
+               'label-warning': (value.status === 'In progress'),
+               'label-success': (value.status === 'Success'),
+               'label-primary': (value.status === 'Done'),
+               'label-danger': (value.status === 'Failure')
+            }"> {{value.status}}</span>
+            <i>{{value.id}}</i> -
+            [{{value.date}}]
+
+            <span ng-click="removeService(value.id)" class="pull-right badge">Delete <span class="glyphicon glyphicon-minus-sign"></span></span>
+          </accordion-heading>
+            <div>
+              <button type="button" class="badge btn btn-default btn-xs"
+                ng-click="getServiceResults(value.id, analysis.id, value.date, value.service);">
+                <strong>Load results...</strong>
+              </button>
+            </div>
+
+            <div id="serviceOutput"></div>
+
+        </accordion-group>
+      </accordion>
+    </tab>
+
+  </tabset>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <!-- <button class="btn btn-warning" ng-click="cancel()">Cancel</button> -->
+</div>
